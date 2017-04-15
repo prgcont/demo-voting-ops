@@ -26,3 +26,13 @@ This is based on https://github.com/alexvanboxel/k8s-docker-vote and addapted to
 3. A lot of resources should be created in OpenShift
 4. Watch whole app start
 5. Vote;)
+
+To try Blue/Green deployment of `voting-app`, run `./deploy.sh blue-green`
+
+# Ops Details
+
+All images are built in OpenShift with use of s2i builds. All deployments are then triggered by new build. You can automate builds by using webhooks - e.g.
+
+```
+oc describe bc voting-app-worker | grep generic | grep URL | sed 's/\s*URL:\s*//'
+```
